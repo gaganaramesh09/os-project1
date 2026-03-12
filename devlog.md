@@ -3,14 +3,19 @@
 **Author:** Gagana Ramesh (gxb210015)  
 **Professor:** Salazar  
 **Date:** 12 March 2026
-**Time:** 1:00 PM
+**Time:** 1:47 PM
 
 **Thoughts so far:**
-I read through the project instructions and understand the overall structure.
-The project requires three programs — a driver, an encrypter using a Vigenère cipher, and a logger.
-They communicate through pipes using subprocess.
+I realized the Vigenère cipher only works on letters, so I need to make sure
+the input going to encrypt/decrypt is only alphabetic characters.
+I also need to handle the case where no passkey is set yet.
 
 **Plan for this session:**
-I will start by implementing the basic structure of the encrypter program.
-The encrypter needs to handle PASSKEY, ENCRYPT, DECRYPT, and QUIT commands via stdin.
-I want to get the Vigenère cipher working correctly first.
+Finish the encrypter with proper error output format (ERROR, not [ERROR]).
+Make sure it handles uppercase input correctly since the spec says I can assume one case.
+
+**Session notes:**
+Got the encrypter working. It reads commands from stdin, parses the command
+from the argument, and performs encrypt/decrypt using the Vigenère cipher.
+Fixed the error output to use "ERROR" instead of "[ERROR]" to match the spec.
+The PASSKEY command now correctly outputs "RESULT" with no argument.
