@@ -3,19 +3,22 @@
 **Author:** Gagana Ramesh (gxb210015)  
 **Professor:** Salazar  
 **Date:** 12 March 2026
-**Time:** 2:35 PM
+**Time:** 3:22 PM
 
 **Thoughts so far:**
-The logger is straightforward — it just reads log messages from stdin and
-writes them to a file with a timestamp. One thing I need to be careful about
-is making sure the timestamp is fresh for each log entry, not just captured once at startup.
+The driver is the most complex part. It needs to spawn the logger and encrypter
+as subprocesses, communicate through pipes, and handle user input with a menu.
+I need to be careful about the order of reads/writes to avoid pipe deadlocks.
 
 **Plan for this session:**
-Implement the logger. Make sure the argument check works properly
-(need at least 2 args since argv[0] is the script name).
+Build the driver with the menu system, subprocess spawning, and basic
+encrypt/decrypt/password/history/quit commands.
 
 **Session notes:**
-Logger is done. It reads from stdin, parses the action from the message,
-and writes it in the format YYYY-MM-DD HH:MM [ACTION] MESSAGE.
-I made sure datetime.now() is called inside the loop so each entry
-gets the actual current time.
+Got the driver working with the menu loop. It spawns logger and encrypter
+using Popen and communicates through stdin/stdout pipes.
+Had an issue where the passkey command was "clogging" the pipe because
+I was trying to read stdout from the encrypter even though PASSKEY
+only outputs "RESULT" with no extra data. Fixed it by still reading
+the RESULT line but not displaying it.
+History is working — stores all input strings for reuse.
