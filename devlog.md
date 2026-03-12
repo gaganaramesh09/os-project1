@@ -3,19 +3,19 @@
 **Author:** Gagana Ramesh (gxb210015)  
 **Professor:** Salazar  
 **Date:** 12 March 2026
-**Time:** 1:47 PM
+**Time:** 2:35 PM
 
 **Thoughts so far:**
-I realized the Vigenère cipher only works on letters, so I need to make sure
-the input going to encrypt/decrypt is only alphabetic characters.
-I also need to handle the case where no passkey is set yet.
+The logger is straightforward — it just reads log messages from stdin and
+writes them to a file with a timestamp. One thing I need to be careful about
+is making sure the timestamp is fresh for each log entry, not just captured once at startup.
 
 **Plan for this session:**
-Finish the encrypter with proper error output format (ERROR, not [ERROR]).
-Make sure it handles uppercase input correctly since the spec says I can assume one case.
+Implement the logger. Make sure the argument check works properly
+(need at least 2 args since argv[0] is the script name).
 
 **Session notes:**
-Got the encrypter working. It reads commands from stdin, parses the command
-from the argument, and performs encrypt/decrypt using the Vigenère cipher.
-Fixed the error output to use "ERROR" instead of "[ERROR]" to match the spec.
-The PASSKEY command now correctly outputs "RESULT" with no argument.
+Logger is done. It reads from stdin, parses the action from the message,
+and writes it in the format YYYY-MM-DD HH:MM [ACTION] MESSAGE.
+I made sure datetime.now() is called inside the loop so each entry
+gets the actual current time.
