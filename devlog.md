@@ -3,22 +3,24 @@
 **Author:** Gagana Ramesh (gxb210015)  
 **Professor:** Salazar  
 **Date:** 12 March 2026
-**Time:** 3:22 PM
+**Time:** 4:18 PM
 
 **Thoughts so far:**
-The driver is the most complex part. It needs to spawn the logger and encrypter
-as subprocesses, communicate through pipes, and handle user input with a menu.
-I need to be careful about the order of reads/writes to avoid pipe deadlocks.
+I re-read the spec and realized two things I missed:
+1. Input to encrypt, decrypt, and password should only contain letters.
+   "Hello World!" should give an error because of the space and exclamation mark.
+2. The encrypted/decrypted results should also be saved in the history,
+   not just the original input strings.
 
 **Plan for this session:**
-Build the driver with the menu system, subprocess spawning, and basic
-encrypt/decrypt/password/history/quit commands.
+Add input validation to reject non-alphabetic input.
+Fix history to also append the result after encryption/decryption.
+Also want to normalize all input to uppercase before sending to encrypter
+since the spec says input should be case insensitive.
 
 **Session notes:**
-Got the driver working with the menu loop. It spawns logger and encrypter
-using Popen and communicates through stdin/stdout pipes.
-Had an issue where the passkey command was "clogging" the pipe because
-I was trying to read stdout from the encrypter even though PASSKEY
-only outputs "RESULT" with no extra data. Fixed it by still reading
-the RESULT line but not displaying it.
-History is working — stores all input strings for reuse.
+Added an is_valid_input() function that checks text.isalpha().
+Now the driver converts everything to uppercase before sending to the encrypter,
+which makes the Vigenère cipher math consistent.
+Also fixed history — results are now appended after the RESULT prefix is stripped.
+Tested encrypt "HELLO" with passkey "HELLO" and got "OIWWC" which matches the spec example.
