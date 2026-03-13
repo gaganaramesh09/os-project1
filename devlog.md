@@ -3,24 +3,23 @@
 **Author:** Gagana Ramesh (gxb210015)  
 **Professor:** Salazar  
 **Date:** 12 March 2026
-**Time:** 4:18 PM
+**Time:** 5:41 PM
 
 **Thoughts so far:**
-I re-read the spec and realized two things I missed:
-1. Input to encrypt, decrypt, and password should only contain letters.
-   "Hello World!" should give an error because of the space and exclamation mark.
-2. The encrypted/decrypted results should also be saved in the history,
-   not just the original input strings.
+Everything is working. Just need to update the README with my information
+and do a final round of testing.
 
 **Plan for this session:**
-Add input validation to reject non-alphabetic input.
-Fix history to also append the result after encryption/decryption.
-Also want to normalize all input to uppercase before sending to encrypter
-since the spec says input should be case insensitive.
+Update README.md with my name and info. Do final testing of all commands.
+Make sure the log file output format matches the spec exactly.
 
 **Session notes:**
-Added an is_valid_input() function that checks text.isalpha().
-Now the driver converts everything to uppercase before sending to the encrypter,
-which makes the Vigenère cipher math consistent.
-Also fixed history — results are now appended after the RESULT prefix is stripped.
-Tested encrypt "HELLO" with passkey "HELLO" and got "OIWWC" which matches the spec example.
+Updated README with my name and usage instructions.
+Final testing went well:
+- Encrypting "HELLO" with passkey "HELLO" → "OIWWC" ✓
+- Decrypting "OIWWC" with passkey "HELLO" → "HELLO" ✓  
+- Trying to encrypt "Hello World!" → error message ✓
+- History shows both input and results ✓
+- Log file has correct timestamp format ✓
+- All three programs communicate properly through pipes ✓
+Everything looks good. Cleaning up and submitting.
